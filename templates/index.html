@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Game Deals Dashboard</title>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+```
+
+</head>
+
+<body>
+
+<div class="container">
+
+```
+<!-- ================= HEADER ================= -->
+
+<header class="main-header">
+
+    <div>
+
+        <h1>🎮 Game Deals</h1>
+
+        <p>
+            Find the best game prices and discounts
+        </p>
+
+    </div>
+
+    <a
+        href="/refresh"
+        class="refresh-button"
+    >
+        🔄 Refresh
+    </a>
+
+</header>
+
+
+<!-- ================= SUMMARY CARDS ================= -->
+
+<section class="summary-grid">
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            🎮
+        </div>
+
+        <div>
+
+            <p>Total Games</p>
+
+            <h2>
+                {{ total_games }}
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            💰
+        </div>
+
+        <div>
+
+            <p>Average Price</p>
+
+            <h2>
+                ${{ "%.2f"|format(average_price) }}
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            🔥
+        </div>
+
+        <div>
+
+            <p>Highest Discount</p>
+
+            <h2>
+                {{ highest_discount }}%
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            🏆
+        </div>
+
+        <div>
+
+            <p>Best Deal</p>
+
+            {% if best_deal %}
+
+            <h2 class="best-summary">
+                {{ best_deal.discount }}% OFF
+            </h2>
+
+            {% else %}
+
+            <h2>
+                -
+            </h2>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= BEST DEAL ================= -->
+
+{% if best_deal %}
+
+<section class="best-deal">
+
+    <div class="best-deal-image">
+
+        {% if best_deal.thumbnail %}
+
+        <img
+            src="{{ best_deal.thumbnail }}"
+            alt="{{ best_deal.title }}"
+        >
+
+        {% else %}
+
+        <div class="image-placeholder">
+            🎮
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="best-deal-content">
+
+        <span class="deal-label">
+            🏆 BEST DEAL
+        </span>
+
+        <h2>
+            {{ best_deal.title }}
+        </h2>
+
+        <p class="best-genre">
+            🎮 {{ best_deal.genre }}
+        </p>
+
+        <p class="store">
+            🏪 {{ best_deal.store_name }}
+        </p>
+
+    </div>
+
+
+    <div class="best-price">
+
+        <span class="old-price">
+            ${{ "%.2f"|format(best_deal.old_price) }}
+        </span>
+
+        <strong>
+            ${{ "%.2f"|format(best_deal.price) }}
+        </strong>
+
+        <span class="discount">
+            {{ best_deal.discount }}% OFF
+        </span>
+
+        <a
+            href="{{ best_deal.deal_url }}"
+            target="_blank"
+            class="deal-button"
+        >
+            View Deal →
+        </a>
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- ================= FILTERS ================= -->
+
+<section class="filters">
+
+    <div class="filter-heading">
+
+        <h2>
+            🔎 Find Games
+        </h2>
+
+        <span>
+            Filter available deals
+        </span>
+
+    </div>
+
+
+    <form method="GET">
+
+        <div class="filter-group">
+
+            <label>
+                Genre
+            </label>
+
+            <select name="genre">
+
+                <option value="All">
+                    All Genres
+                </option>
+
+                {% for genre in genres %}
+
+                <option
+                    value="{{ genre }}"
+                    {% if selected_genre == genre %}
+                        selected
+                    {% endif %}
+                >
+
+                    {{ genre }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <div class="filter-group">
+
+            <label>
+                Maximum Price
+            </label>
+
+            <input
+                type="number"
+                name="max_price"
+                placeholder="Example: 30"
+                step="0.01"
+                min="0"
+                value="{{ max_price }}"
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="apply-button"
+        >
+            Apply Filters
+        </button>
+
+
+        <a
+            href="/"
+            class="clear-button"
+        >
+            Clear
+        </a>
+
+    </form>
+
+</section>
+
+
+<!-- ================= GAME SECTION ================= -->
+
+<section class="games-section">
+
+    <div class="section-title">
+
+        <div>
+
+            <h2>
+                Available Deals
+            </h2>
+
+            <p>
+                Games currently available from CheapShark
+            </p>
+
+        </div>
+
+        <span class="game-count">
+            {{ games|length }} games
+        </span>
+
+    </div>
+
+
+    {% if games %}
+
+    <div class="game-grid">
+
+        {% for game in games %}
+
+        <div
+            class="game-card
+            {% if best_deal and game.title == best_deal.title %}
+                best-card
+            {% endif %}
+            "
+        >
+
+            <!-- Best badge -->
+
+            {% if best_deal and game.title == best_deal.title %}
+
+            <div class="best-badge">
+                🏆 BEST DEAL
+            </div>
+
+            {% endif %}
+
+
+            <!-- Game Image -->
+
+            <div class="game-image">
+
+                {% if game.thumbnail %}
+
+                <img
+                    src="{{ game.thumbnail }}"
+                    alt="{{ game.title }}"
+                >
+
+                {% else %}
+
+                <div class="image-placeholder">
+                    🎮
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Game Details -->
+
+            <div class="game-content">
+
+                <h3>
+                    {{ game.title }}
+                </h3>
+
+
+                <p class="genre">
+                    🎮 {{ game.genre }}
+                </p>
+
+
+                <p class="store">
+                    🏪 {{ game.store_name }}
+                </p>
+
+
+                <!-- Price -->
+
+                <div class="price">
+
+                    <span class="old-price">
+                        ${{ "%.2f"|format(game.old_price) }}
+                    </span>
+
+                    <strong>
+                        ${{ "%.2f"|format(game.price) }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Discount -->
+
+                {% if game.discount > 0 %}
+
+                <span class="discount">
+                    🔥 {{ game.discount }}% OFF
+                </span>
+
+                {% else %}
+
+                <span class="no-discount">
+                    No Discount
+                </span>
+
+                {% endif %}
+
+
+                <!-- Deal button -->
+
+                <a
+                    href="{{ game.deal_url }}"
+                    target="_blank"
+                    class="view-deal"
+                >
+                    View Deal →
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+    <div class="no-results">
+
+        <div class="no-results-icon">
+            😕
+        </div>
+
+        <h3>
+            No games found
+        </h3>
+
+        <p>
+            Try changing your genre or maximum-price filter.
+        </p>
+
+        <a
+            href="/"
+            class="clear-button"
+        >
+            Clear Filters
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+```
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,610 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+body {
+font-family: Arial, sans-serif;
+background: #f4f6f9;
+color: #222;
+}
+
+/* =========================================================
+CONTAINER
+========================================================= */
+
+.container {
+width: 92%;
+max-width: 1400px;
+margin: auto;
+padding: 30px 0 50px;
+}
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.main-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 30px;
+}
+
+.main-header h1 {
+font-size: 34px;
+margin-bottom: 7px;
+}
+
+.main-header p {
+color: #777;
+font-size: 15px;
+}
+
+.refresh-button {
+display: inline-block;
+text-decoration: none;
+background: #222;
+color: white;
+padding: 12px 20px;
+border-radius: 8px;
+font-weight: bold;
+transition: 0.2s;
+}
+
+.refresh-button:hover {
+background: #444;
+transform: translateY(-2px);
+}
+
+/* =========================================================
+SUMMARY CARDS
+========================================================= */
+
+.summary-grid {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 18px;
+margin-bottom: 25px;
+}
+
+.summary-card {
+background: white;
+border-radius: 14px;
+padding: 20px;
+display: flex;
+align-items: center;
+gap: 15px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.summary-icon {
+width: 52px;
+height: 52px;
+border-radius: 12px;
+background: #f1f3f5;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 24px;
+}
+
+.summary-card p {
+color: #777;
+font-size: 13px;
+margin-bottom: 5px;
+}
+
+.summary-card h2 {
+font-size: 24px;
+}
+
+.best-summary {
+color: #e67e00;
+}
+
+/* =========================================================
+BEST DEAL
+========================================================= */
+
+.best-deal {
+background: white;
+border-radius: 16px;
+padding: 22px;
+margin-bottom: 25px;
+
+
+display: flex;
+align-items: center;
+gap: 22px;
+
+border-left: 6px solid #ff9800;
+
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+}
+
+.best-deal-image {
+width: 150px;
+height: 95px;
+flex-shrink: 0;
+overflow: hidden;
+border-radius: 10px;
+background: #eee;
+}
+
+.best-deal-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.best-deal-content {
+flex: 1;
+}
+
+.deal-label {
+color: #e67e00;
+font-weight: bold;
+font-size: 13px;
+}
+
+.best-deal h2 {
+margin: 8px 0;
+font-size: 23px;
+}
+
+.best-genre {
+color: #777;
+margin-bottom: 5px;
+}
+
+.store {
+color: #666;
+font-size: 14px;
+margin-bottom: 12px;
+}
+
+.best-price {
+text-align: right;
+min-width: 170px;
+}
+
+.best-price strong {
+display: block;
+font-size: 30px;
+margin: 3px 0 8px;
+}
+
+.old-price {
+text-decoration: line-through;
+color: #999;
+}
+
+.discount {
+display: inline-block;
+background: #dff5e4;
+color: #17833b;
+padding: 5px 10px;
+border-radius: 20px;
+font-weight: bold;
+font-size: 13px;
+}
+
+/* =========================================================
+DEAL BUTTON
+========================================================= */
+
+.deal-button {
+display: inline-block;
+margin-top: 12px;
+text-decoration: none;
+background: #222;
+color: white;
+padding: 9px 15px;
+border-radius: 7px;
+font-size: 13px;
+font-weight: bold;
+}
+
+.deal-button:hover {
+background: #444;
+}
+
+/* =========================================================
+FILTERS
+========================================================= */
+
+.filters {
+background: white;
+padding: 22px;
+border-radius: 14px;
+margin-bottom: 30px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.filter-heading {
+margin-bottom: 18px;
+}
+
+.filter-heading h2 {
+font-size: 20px;
+margin-bottom: 5px;
+}
+
+.filter-heading span {
+color: #888;
+font-size: 13px;
+}
+
+.filters form {
+display: flex;
+gap: 15px;
+align-items: end;
+flex-wrap: wrap;
+}
+
+.filter-group {
+display: flex;
+flex-direction: column;
+gap: 7px;
+}
+
+.filter-group label {
+font-size: 14px;
+font-weight: bold;
+}
+
+select,
+input {
+min-width: 190px;
+padding: 11px 12px;
+border: 1px solid #ddd;
+border-radius: 7px;
+font-size: 14px;
+background: white;
+}
+
+select:focus,
+input:focus {
+outline: none;
+border-color: #888;
+}
+
+.apply-button {
+padding: 11px 20px;
+border: none;
+border-radius: 7px;
+background: #222;
+color: white;
+cursor: pointer;
+font-weight: bold;
+}
+
+.apply-button:hover {
+background: #444;
+}
+
+.clear-button {
+display: inline-block;
+padding: 11px 20px;
+background: #eee;
+color: #222;
+text-decoration: none;
+border-radius: 7px;
+font-weight: bold;
+}
+
+.clear-button:hover {
+background: #ddd;
+}
+
+/* =========================================================
+SECTION TITLE
+========================================================= */
+
+.section-title {
+display: flex;
+justify-content: space-between;
+align-items: end;
+margin-bottom: 20px;
+}
+
+.section-title h2 {
+font-size: 24px;
+margin-bottom: 5px;
+}
+
+.section-title p {
+color: #888;
+font-size: 13px;
+}
+
+.game-count {
+background: white;
+padding: 8px 13px;
+border-radius: 20px;
+color: #666;
+font-size: 13px;
+}
+
+/* =========================================================
+GAME GRID
+========================================================= */
+
+.game-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+gap: 22px;
+}
+
+/* =========================================================
+GAME CARD
+========================================================= */
+
+.game-card {
+position: relative;
+background: white;
+border-radius: 14px;
+overflow: hidden;
+
+
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+
+transition: 0.2s;
+
+
+}
+
+.game-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================================================
+GAME IMAGE
+========================================================= */
+
+.game-image {
+width: 100%;
+height: 155px;
+background: #eee;
+overflow: hidden;
+}
+
+.game-image img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+}
+
+.image-placeholder {
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 45px;
+background: #eee;
+}
+
+/* =========================================================
+GAME CONTENT
+========================================================= */
+
+.game-content {
+padding: 18px;
+}
+
+.game-card h3 {
+font-size: 18px;
+line-height: 1.35;
+margin-bottom: 10px;
+min-height: 48px;
+}
+
+.genre {
+color: #777;
+font-size: 14px;
+margin-bottom: 8px;
+}
+
+.game-content .store {
+margin-bottom: 14px;
+}
+
+/* =========================================================
+PRICE
+========================================================= */
+
+.price {
+margin-bottom: 10px;
+}
+
+.price strong {
+display: block;
+font-size: 25px;
+margin-top: 3px;
+}
+
+/* =========================================================
+VIEW DEAL
+========================================================= */
+
+.view-deal {
+display: block;
+width: 100%;
+text-align: center;
+
+
+margin-top: 15px;
+
+padding: 10px;
+
+background: #222;
+color: white;
+
+text-decoration: none;
+
+border-radius: 7px;
+
+font-weight: bold;
+font-size: 14px;
+
+
+}
+
+.view-deal:hover {
+background: #444;
+}
+
+/* =========================================================
+BEST DEAL CARD
+========================================================= */
+
+.best-card {
+border: 2px solid #ff9800;
+}
+
+.best-badge {
+position: absolute;
+
+
+top: 12px;
+right: 12px;
+
+background: #ff9800;
+color: white;
+
+padding: 6px 9px;
+
+border-radius: 5px;
+
+font-size: 10px;
+font-weight: bold;
+
+z-index: 2;
+
+
+}
+
+/* =========================================================
+NO DISCOUNT
+========================================================= */
+
+.no-discount {
+display: inline-block;
+color: #888;
+background: #f1f1f1;
+padding: 5px 10px;
+border-radius: 20px;
+font-size: 13px;
+}
+
+/* =========================================================
+NO RESULTS
+========================================================= */
+
+.no-results {
+background: white;
+padding: 60px 30px;
+text-align: center;
+border-radius: 14px;
+}
+
+.no-results-icon {
+font-size: 45px;
+margin-bottom: 10px;
+}
+
+.no-results h3 {
+font-size: 22px;
+margin-bottom: 8px;
+}
+
+.no-results p {
+color: #777;
+margin-bottom: 20px;
+}
+
+/* =========================================================
+MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+
+.summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+}
+
+@media (max-width: 600px) {
+
+.container {
+    width: 94%;
+    padding-top: 20px;
+}
+
+
+.main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+
+.summary-grid {
+    grid-template-columns: 1fr;
+}
+
+
+.best-deal {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.best-deal-image {
+    width: 100%;
+    height: 180px;
+}
+
+
+.best-price {
+    text-align: left;
+}
+
+
+.filters form {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+
+.filter-group {
+    width: 100%;
+}
+
+
+select,
+input {
+    width: 100%;
+}
+
+
+.apply-button,
+.clear-button {
+    width: 100%;
+    text-align: center;
+}
+
+
+.section-title {
+    align-items: flex-start;
+    gap: 10px;
+    flex-direction: column;
+}
+}
